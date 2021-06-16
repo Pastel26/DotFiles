@@ -146,7 +146,7 @@ font: 				  xft: Hack Nerd Font Mono:style=Regular:size=11
 ! URxvt*tabbar-bg:                  colour
 ! URxvt*tabbar-fg:                  colour
 ! URxvt*url-launcher:               string
-#include "/home/tiago/.cache/wal/colors.Xresources"
+#include "/home/<USER>/.cache/wal/colors.Xresources"
  URxvt.cursorBlink:                 1
 
 
