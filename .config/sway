@@ -20,8 +20,8 @@ set $term urxvt
 bindsym $mod+d exec rofi -show run
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/tiago/Imagens/Wallpapers/collanimegirl.png fill
+# Wallpaper
+output * bg WALLPAPER
 #
 # Example configuration:
 #
