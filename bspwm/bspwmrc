@@ -1,0 +1,42 @@
+#! /bin/sh
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+bspc config border_width         2
+bspc config window_gap           8
+bspc config single_monocle true
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      false
+bspc config top_padding 35
+
+#Rules
+bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a Chromium desktop='^2'
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+
+#Wallpaper, bar, and compositor
+feh --bg-scale /path-to-image/
+polybar -c ~/.config/polybar/config2 bar1 &
+compton &
+xrandr --output eDP --set TearFree on
+
+#Mouse settings
+xsetroot -cursor_name left_ptr  
+xinput set-prop 13 312 1
+xinput set-prop 13 340 1
+xinput set-prop 13 320 1
+xinput set-prop 13 292 1
+
+#Keyboard
+numlockx on
+
+#Focus on hover
+bspc config focus_follows_pointer true
+bspc config focused_border_color "#689d6a"
+
+
+bspc config pointer_modifier + button 1
