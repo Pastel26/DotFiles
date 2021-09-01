@@ -10,7 +10,7 @@ super + Return
 super + d
 	rofi -show drun -show-icons
 # make sxhkd reload its configuration files:
-super + Escape
+super + F1
 	pkill -USR1 -x sxhkd
 
 #
@@ -48,7 +48,6 @@ super + {t,shift + t,s,f}
 # set the node flags
 super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
-
 #
 # focus/swap
 #
@@ -125,7 +124,7 @@ super + shift + {h,j,k,l}
 
 # screenshot
 Print
-	gnome-screenshot && dunstify --icon=/path-to-icon/icon.ico \ \ Screenshot\ taken
+	gnome-screenshot && dunstify --icon=<path-to-icon> \ \ Screenshot\ tirado
 
 #brightness
 XF86MonBrightnessUp
@@ -135,11 +134,11 @@ XF86MonBrightnessDown
 
 #sound
 XF86AudioRaiseVolume 
-	pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+	~/Scripts/volume.sh up +5% #increase sound volume
 XF86AudioLowerVolume
-	pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+	~/Scripts/volume.sh down -5% #decrease sound volume
 XF86AudioMute
-	pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
+	~/Scripts/volume.sh mute toggle # mute sound
 XF86AudioNext 
 	playerctl next #play next
 XF86AudioPrev
@@ -149,4 +148,16 @@ XF86AudioPlay
 
 #lockcreen
 super + l 
-	i3lock -i /path-to-image
+	playerctl stop && amixer -c 1 set Master mute && i3lock -i Imagens/Wallpapers/blurredcollanimegirl.png
+
+#powermenu
+super + Escape
+	/home/<user>/.config/rofi/applets/menu/powermenu.sh
+
+#apps 
+super + shift + d 
+	/home/<user>/.config/rofi/applets/menu/apps.sh
+
+#quicklinks
+super + e 
+	/home/<user>/.config/rofi/applets/menu/quicklinks.sh
