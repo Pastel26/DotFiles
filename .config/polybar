@@ -11,13 +11,12 @@
 ;      
 ;==========================================================
 
-
 [colors]
 background = #1d2021
 background-alt = #282828
 ; foreground = #a89984
 foreground = #ffffff
-foreground-alt = #689d6a
+foreground-alt = #83a598
 primary = #665c54
 secondary = #928374
 alert = #ea6962
@@ -30,46 +29,36 @@ height = 27
 ;offset-y = 1%
 radius = 0
 fixed-center = true
-
 ;bottom = true
-
 background = ${colors.background}
 foreground = ${colors.foreground}
-
 line-size = 2
 line-color = #f00
-
 border-size = 3
 border-color = ${colors.foreground-alt}
-
 padding-left = 0
 padding-right = 2
-
 module-margin-left = 1
 module-margin-right = 2
-
 font-0 = Fira Code Nerd Font:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
+font-3 = HackNerdFont:pixelsize=12;1
 
-modules-left = bspwm xwindow
-modules-center = date
-modules-right = wlan filesystem volume-bar cpu memory battery 
+modules-left = bspwm spotify
+modules-center = date 
+modules-right = wifi-applet wlan filesystem volume-bar cpu memory battery powermenu
 
 tray-position = right
 tray-padding = 2
 ;tray-background = #0063ff
 
 wm-restack = bspwm
-;wm-restack = i3
 
 ;override-redirect = true
 
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
-
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -80,19 +69,15 @@ label = %title:0:30:...%
 
 [module/bspwm]
 type = internal/bspwm
-
 label-focused = %icon% 
 label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.primary}
 label-focused-padding = 2
-
 label-occupied = %icon%
 label-occupied-padding = 2
-
 label-urgent = %icon%!
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
-
 label-empty = %icon%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
@@ -106,7 +91,7 @@ ws-icon-5 = VI;6
 ws-icon-6 = VII;7
 ws-icon-7 = VIII;8
 ws-icon-8 = IX;9
-ws-icon-9 = X;0 
+ws-icon-9 = X;0
 
 [module/cpu]
 type = internal/cpu
@@ -123,72 +108,37 @@ format-prefix = "ram "
 format-prefix-foreground = ${colors.foreground}
 format-underline = #4bffdc
 label = %percentage_used%%
-;label = %mb_used%
+;label = %gb_used%
 
 [module/wlan]
 type = internal/network
 interface = wlo1
 interval = 5.0
-
-format-connected = <label-connected> <ramp-signal>
+format-connected = <label-connected>
 format-connected-underline = #b16287
 label-connected = %essid%
-;
-;format-disconnected =
-;;format-disconnected = <label-disconnected>
-;;format-disconnected-underline = ${self.format-connected-underline}
-;;label-disconnected = %ifname% disconnected
-;;label-disconnected-foreground = ${colors.foreground}
-;
-ramp-signal-0 =
-ramp-signal-1 =
-ramp-signal-2 =
-ramp-signal-3 =
-ramp-signal-4 =
-ramp-signal-foreground = ${colors.foreground-alt}
-
-[module/eth]
-type = internal/network
-interface = eno1
-interval = 3.0
-
-format-connected-underline = #55aa55
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+format-disconnected = Desconectado.....
+click-left = exec ~/.config/rofi/applets/menu/network.sh
 
 [module/date]
 type = internal/date
 interval = 5
-
 date = %a
 date-alt = " %Y-%m-%d"
-
 time = %H:%M
 time-alt = %H:%M:%S
-
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.primary}
-
 label = %date% %time%
 
 [module/volume-bar]
 type = internal/pulseaudio
-
 format-volume = <label-volume> <bar-volume>
-label-volume = Volume
+label-volume = Volume 
 label-volume-foreground = ${root.foreground}
-
-label-muted = muted
+label-muted = 婢\ muted
 label-muted-foreground = #666
-
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
 bar-volume-foreground-1 = #55aa55
@@ -217,22 +167,18 @@ format-charging =A carregar <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
 format-discharging =Bateria <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
-
 format-full-prefix = "BAT "
 format-full-prefix-foreground = ${colors.foreground}
 format-full-underline = ${self.format-charging-underline}
-
 ramp-capacity-0 =
 ramp-capacity-1 =
 ramp-capacity-2 =
 ramp-capacity-foreground = ${colors.foreground-alt}
-
 animation-charging-0 =
 animation-charging-1 =
 animation-charging-2 =
 animation-charging-foreground = ${colors.foreground-alt}
 animation-charging-framerate = 750
-
 animation-discharging-0 =
 animation-discharging-1 =
 animation-discharging-2 =
@@ -243,16 +189,13 @@ time-format = %H:%M
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
-
 format = <ramp> <label>
 format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
-
 label = %temperature-c%
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.secondary}
-
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
@@ -260,21 +203,31 @@ ramp-foreground = ${colors.foreground-alt}
 
 [module/filesystem]
 type = internal/fs
-
-; Mountpoints to display
 mount-0 = /
+interval = 30
+[module/backlight]
+type = internal/backlight
 
-; Seconds to sleep between updates
-; Default: 30
-interval = 60
+[module/powermenu]
+type = custom/text
+content-foreground = ${colors.powerMenuAccent}
+content = ""
+click-left = ~/.config/rofi/applets/menu/powermenu.sh
 
-; Display fixed precision values
-; Default: false
-fixed-values = true
+[module/wifi-applet]
+type = custom/text
+content = " "
+click-left = ~/.config/rofi/applets/applets/network.sh
 
-; Spacing between entries
-; Default: 2
-spacing = 4
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = "   "
+format = <label>
+exec = python3 Scripts/spotify_status.py -f '{artist}: {song}'
+format-underline = #1db954
+;control players (optional)
+click-left = .config/rofi/applets/applets/mpd.sh
 
 [settings]
 screenchange-reload = true
@@ -287,3 +240,4 @@ screenchange-reload = true
 [global/wm]
 margin-top = 0
 margin-bottom = 0
+
