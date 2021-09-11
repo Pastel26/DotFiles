@@ -12,7 +12,7 @@
 ;==========================================================
 
 [colors]
-background = #1d2021
+background = #272729
 background-alt = #282828
 ; foreground = #a89984
 foreground = #ffffff
@@ -47,7 +47,7 @@ font-3 = HackNerdFont:pixelsize=12;1
 
 modules-left = bspwm spotify
 modules-center = date 
-modules-right = wifi-applet wlan filesystem volume-bar cpu memory battery powermenu
+modules-right = wifi-applet wlan filesystem volume-bar cpu memory battery batterylow
 
 tray-position = right
 tray-padding = 2
@@ -130,7 +130,7 @@ time-alt = %H:%M:%S
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.primary}
-label = %date% %time%
+label = %time%
 
 [module/volume-bar]
 type = internal/pulseaudio
@@ -167,7 +167,7 @@ format-charging =A carregar <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
 format-discharging =Bateria <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
-format-full-prefix = "BAT "
+format-full-prefix = "Batteria Carregada"
 format-full-prefix-foreground = ${colors.foreground}
 format-full-underline = ${self.format-charging-underline}
 ramp-capacity-0 =
@@ -185,6 +185,7 @@ animation-discharging-2 =
 animation-discharging-foreground = ${colors.foreground-alt}
 animation-discharging-framerate = 750
 time-format = %H:%M
+
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
@@ -228,6 +229,12 @@ exec = python3 Scripts/spotify_status.py -f '{artist}: {song}'
 format-underline = #1db954
 ;control players (optional)
 click-left = .config/rofi/applets/applets/mpd.sh
+
+[module/batterylow]
+;this script warns about low battery
+type = custom/script
+exec = ~/.batery-low.sh
+interval = 300
 
 [settings]
 screenchange-reload = true
