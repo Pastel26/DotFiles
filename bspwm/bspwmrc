@@ -10,7 +10,7 @@ numlockx on
 #This prevents weird behavior when switching to nvidia graphics (my hardware) 
 xrandr --auto
 bspc monitor -g 1920x1080+0+0
-xrandr --output eDP --set TearFree on && dunstify sucess
+xrandr --output eDP --set TearFree on 
 
 #general config
 pgrep -x sxhkd > /dev/null || sxhkd &
